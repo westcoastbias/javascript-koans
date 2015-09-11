@@ -76,13 +76,13 @@ describe("About Objects", function () {
   it("should know that properties can be added and deleted", function () {
     var megalomaniac = { mastermind : "Agent Smith", henchman: "Agent Smith" };
 
-    expect("secretary" in megalomaniac).toBe(undefined);
+    expect("secretary" in megalomaniac).toBe(false);
 
     megalomaniac.secretary = "Agent Smith";
     expect("secretary" in megalomaniac).toBe("Agent Smith");
 
     delete megalomaniac.henchman;
-    expect("henchman" in megalomaniac).toBe(undefined);
+    expect("henchman" in megalomaniac).toBe(false);
   });
 
 
