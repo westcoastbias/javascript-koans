@@ -41,7 +41,7 @@ describe("About Applying What We Have Learnt", function() {
 
       /* solve using filter() & all() / any() */
       productsICanEat = products.filter(function(element){return element.containsNuts === false && 
-        element.ingredients._all(function(element){return element != "mushrooms";}))
+        element.ingredients.every(function(element){return element != "mushrooms";}))
       expect(productsICanEat.length).toBe(1);
   });
 
@@ -56,12 +56,18 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
 
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var sum = range(1,999).reduce(function(a, b){
+        if(b%3===0 || b%5===0)
+          {return a += b;}
+        else{
+          return a;
+        }
+        },0);    /* try chaining range() and reduce() */
 
     expect(233168).toBe(sum);
   });
@@ -76,15 +82,26 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
+    ingredientCount = products.map(function(product){
+      return product.ingredients;}).reduce(function(a,b){
+      return a.concat(b);},[]).reduce(function(ingredientObject,topping){
+      if(ingredientObject[topping]){
+        ingredientObject[topping]++;
+      }
+      else {
+        ingredientObject[topping] = 1;
+      }
+      return ingredientObject;
+    },{});
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
